@@ -1,0 +1,843 @@
+<html><head></head><body><div class="apidocDiv">
+<style>
+/*csslint
+*/
+.apidocDiv {
+    background: #fff;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.apidocDiv a[href] {
+    color: #33f;
+    font-weight: bold;
+    text-decoration: none;
+}
+.apidocDiv a[href]:hover {
+    text-decoration: underline;
+}
+.apidocCodeCommentSpan {
+    background: #bbf;
+    color: #000;
+    display: block;
+}
+.apidocCodeKeywordSpan {
+    color: #d00;
+    font-weight: bold;
+}
+.apidocCodePre {
+    background: #eef;
+    border: 1px solid;
+    color: #777;
+    padding: 5px;
+    white-space: pre-wrap;
+}
+.apidocFooterDiv {
+    margin-top: 20px;
+    text-align: center;
+}
+.apidocModuleLi {
+    margin-top: 10px;
+}
+.apidocSectionDiv {
+    border-top: 1px solid;
+    margin-top: 20px;
+}
+.apidocSignatureSpan {
+    color: #777;
+    font-weight: bold;
+}
+</style>
+<h1>api documentation for
+    <a href="https://github.com/dowjones/gulp-bundle-assets#readme">gulp-bundle-assets (v2.27.1)</a>
+</h1>
+<h4>Create asset (js, css) bundles from a config file leveraging the power of streams</h4>
+<div class="apidocSectionDiv"><a href="#apidoc.tableOfContents" id="apidoc.tableOfContents"><h1>table of contents</h1></a><ol>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.gulp-bundle-assets">module gulp-bundle-assets</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.gulp-bundle-assets.results">
+            function <span class="apidocSignatureSpan">gulp-bundle-assets.</span>results
+            <span class="apidocSignatureSpan">(opts)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.gulp-bundle-assets.watch">
+            function <span class="apidocSignatureSpan">gulp-bundle-assets.</span>watch
+            <span class="apidocSignatureSpan">(opts)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">gulp-bundle-assets.</span>stream_files</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">gulp-bundle-assets.</span>string_helper</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">gulp-bundle-assets.</span>transformHelper</span>
+
+        </li>
+
+        <li>
+
+            <span class="apidocSignatureSpan">object <span class="apidocSignatureSpan">gulp-bundle-assets.</span>using</span>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.gulp-bundle-assets.stream_files">module gulp-bundle-assets.stream_files</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.gulp-bundle-assets.stream_files.attachStreamOptions">
+            function <span class="apidocSignatureSpan">gulp-bundle-assets.stream_files.</span>attachStreamOptions
+            <span class="apidocSignatureSpan">(file, opts)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.gulp-bundle-assets.stream_files.handleTransformError">
+            function <span class="apidocSignatureSpan">gulp-bundle-assets.stream_files.</span>handleTransformError
+            <span class="apidocSignatureSpan">(thisStream, isWatch, bundleName, bundleKey, err)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.gulp-bundle-assets.stream_files.scripts">
+            function <span class="apidocSignatureSpan">gulp-bundle-assets.stream_files.</span>scripts
+            <span class="apidocSignatureSpan">(opts)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.gulp-bundle-assets.stream_files.styles">
+            function <span class="apidocSignatureSpan">gulp-bundle-assets.stream_files.</span>styles
+            <span class="apidocSignatureSpan">(opts)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.gulp-bundle-assets.string_helper">module gulp-bundle-assets.string_helper</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.gulp-bundle-assets.string_helper.endsWith">
+            function <span class="apidocSignatureSpan">gulp-bundle-assets.string_helper.</span>endsWith
+            <span class="apidocSignatureSpan">(str, suffix)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.gulp-bundle-assets.transformHelper">module gulp-bundle-assets.transformHelper</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.gulp-bundle-assets.transformHelper.browserify">
+            function <span class="apidocSignatureSpan">gulp-bundle-assets.transformHelper.</span>browserify
+            <span class="apidocSignatureSpan">(func)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.gulp-bundle-assets.transformHelper.coffee">
+            function <span class="apidocSignatureSpan">gulp-bundle-assets.transformHelper.</span>coffee
+            <span class="apidocSignatureSpan">(opts)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.gulp-bundle-assets.transformHelper.less">
+            function <span class="apidocSignatureSpan">gulp-bundle-assets.transformHelper.</span>less
+            <span class="apidocSignatureSpan">(opts)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+    <li class="apidocModuleLi"><a href="#apidoc.module.gulp-bundle-assets.using">module gulp-bundle-assets.using</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.gulp-bundle-assets.using.bundle">
+            function <span class="apidocSignatureSpan">gulp-bundle-assets.using.</span>bundle
+            <span class="apidocSignatureSpan">(key, type, env, bundleAllEnvironments)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.gulp-bundle-assets.using.bundleName">
+            function <span class="apidocSignatureSpan">gulp-bundle-assets.using.</span>bundleName
+            <span class="apidocSignatureSpan">(key, type, env, bundleAllEnvironments)</span>
+            </a>
+
+        </li>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.gulp-bundle-assets.using.copy">
+            function <span class="apidocSignatureSpan">gulp-bundle-assets.using.</span>copy
+            <span class="apidocSignatureSpan">(base)</span>
+            </a>
+
+        </li>
+
+    </ol></li>
+
+</ol></div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.gulp-bundle-assets" id="apidoc.module.gulp-bundle-assets">module gulp-bundle-assets</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.gulp-bundle-assets.results" id="apidoc.element.gulp-bundle-assets.results">
+        function <span class="apidocSignatureSpan">gulp-bundle-assets.</span>results
+        <span class="apidocSignatureSpan">(opts)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">results = function (opts) {
+  var resultJsons = {},
+    resultOrder,
+    options = defaulOptions(opts);
+
+  function collectResults(file, enc, cb) {
+    addBundleResults(resultJsons, file, options.pathPrefix, options.fileName);
+    if (!resultOrder) {
+      try {
+        resultOrder = file.bundle.result.bundleOrder; // Any one of these properties could be null
+      } catch (err) {}
+    }
+    this.push(file);
+    cb();
+  }
+
+  function writeResults(done) {
+    mkdirp(options.dest, function (err) {
+      if (err) throw err;
+
+      var streams = [];
+
+      _.each(resultJsons, function (result) {
+        var sortedContents = {};
+        try {
+          // order bundle names based on original bundle.config.js ordering
+          _.each(resultOrder || Object.keys(result.contents), function (key) {
+            // order scripts/styles for consistency
+            var sortedBundleTypes = {};
+            _.each(Object.keys(result.contents[key]).sort(), function (typeKey) {
+              sortedBundleTypes[typeKey] = result.contents[key][typeKey];
+            });
+            sortedContents[key] = sortedBundleTypes;
+          });
+        } catch (err) { // any problems sorting? just fall back to what we get out of the stream
+          sortedContents = result.contents;
+        }
+        var filePath = path.join(options.dest, result.filename),
+          data = JSON.stringify(sortedContents, null, 2);
+        streams.push(fs.writeFileAsync(filePath, data));
+      });
+
+      bluebird.all(streams).then(function () {
+        done();
+      });
+
+    });
+  }
+
+  return through.obj(collectResults, writeResults);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+// gulpfile.js
+var gulp = require('gulp'),
+  bundle = require('gulp-bundle-assets');
+
+gulp.task('bundle', function() {
+  return gulp.src('./bundle.config.js')
+    .pipe(bundle())
+    .pipe(bundle.<span class="apidocCodeKeywordSpan">results</span>('./')) // arg is destination of bundle.result.json
+    .pipe(gulp.dest('./public'));
+});
+```
+
+Which results in a `bundle.result.json` file similar to:
+
+```json
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.gulp-bundle-assets.watch" id="apidoc.element.gulp-bundle-assets.watch">
+        function <span class="apidocSignatureSpan">gulp-bundle-assets.</span>watch
+        <span class="apidocSignatureSpan">(opts)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">watch = function (opts) {
+  var configFile,
+    config;
+  opts = opts || {};
+  if (!opts.configPath) {
+    throw new gutil.PluginError('gulp-bundle-assets', 'configPath option is required when watching');
+  }
+  if (!opts.dest) {
+    throw new gutil.PluginError('gulp-bundle-assets', 'dest option is required when watching');
+  }
+
+  try {
+    configFile = require(opts.configPath);
+    config = new ConfigModel(configFile, opts);
+  } catch (e) {
+    gutil.log(e);
+    throw new gutil.PluginError('gulp-bundle-assets', 'Failed to parse config file');
+  }
+
+  cache.set('config', config);
+
+  streamBundlesWatch(config);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+        if (scriptWatch !== false) {
+
+          scriptsPath = pathifySrc(namedBundleObj[BundleKeys.SCRIPTS], base, namedBundleObj[BundleKeys.OPTIONS], env);
+          prettyScriptsBundleName = using.bundleName(bundleName, BundleKeys.SCRIPTS, env, isBundleAll);
+
+          logger.log("Starting '" + gutil.colors.cyan("watch") + "' for bundle '" +
+gutil.colors.green(prettyScriptsBundleName) + "'...");
+
+          gulp.<span class="apidocCodeKeywordSpan">watch</span>((typeof scriptWatch === 'string' || util.isArray(scriptWatch
+)) ? scriptWatch : scriptsPath)
+            .on('change', function (file) { // log changed file?
+
+var start = process.hrtime();
+
+streamFiles.scripts({
+  src: scriptsPath,
+  base: base,
+...</pre></li>
+    </ul>
+
+
+
+
+
+
+
+
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.gulp-bundle-assets.stream_files" id="apidoc.module.gulp-bundle-assets.stream_files">module gulp-bundle-assets.stream_files</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.gulp-bundle-assets.stream_files.attachStreamOptions" id="apidoc.element.gulp-bundle-assets.stream_files.attachStreamOptions">
+        function <span class="apidocSignatureSpan">gulp-bundle-assets.stream_files.</span>attachStreamOptions
+        <span class="apidocSignatureSpan">(file, opts)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">attachStreamOptions = function (file, opts) {
+  // add some useful options to file for possible inspection later in external custom gulp streams
+  file.bundleOptions = {
+    env: opts.env,
+    type: opts.type,
+    bundleName: opts.bundleName,
+    isWatch: opts.isWatch,
+    isBundleAll: opts.isBundleAll
+  };
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+  concatOpts = defaults({
+    path: opts.bundleName + ((opts.isBundleAll &amp;&amp; opts.env) ? '.' + opts.env : '') + '.js'
+;
+  }, opts.bundleOptions.pluginOptions['gulp-concat']);
+
+return gulp.src(opts.src, {base: opts.base})
+  .pipe(using.bundle(opts.bundleName, BundleKeys.SCRIPTS, opts.env, opts.isBundleAll))
+  .pipe(through.obj(function (file, enc, cb) {
+    self.<span class="apidocCodeKeywordSpan">attachStreamOptions</span>(file, opts);
+    this.push(file);
+    cb();
+  }))
+  .pipe(gif(function (file) {
+      return sourcemaps.isEnabled(opts);
+    }, gsourcemaps.init(opts.bundleOptions.pluginOptions['gulp-sourcemaps'][BundleKeys.SCRIPTS].init)
+  ))
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.gulp-bundle-assets.stream_files.handleTransformError" id="apidoc.element.gulp-bundle-assets.stream_files.handleTransformError">
+        function <span class="apidocSignatureSpan">gulp-bundle-assets.stream_files.</span>handleTransformError
+        <span class="apidocSignatureSpan">(thisStream, isWatch, bundleName, bundleKey, err)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">handleTransformError = function (thisStream, isWatch, bundleName, bundleKey, err) {
+  logger.log(gutil.colors.red("ERROR in custom transforms for '" + bundleName + "." + bundleKey + "':"));
+  logger.log(err.toString());
+  if (isWatch) {
+    thisStream.emit('end');
+  } else {
+    process.exit(1);
+  }
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+}))
+.pipe(gif(function (file) {
+    return sourcemaps.isEnabled(opts);
+  }, gsourcemaps.init(opts.bundleOptions.pluginOptions['gulp-sourcemaps'][BundleKeys.SCRIPTS].init)
+))
+.pipe(opts.bundleOptions.transforms[BundleKeys.SCRIPTS]())
+.on('error', function (e) {
+  self.<span class="apidocCodeKeywordSpan">handleTransformError</span>(this, opts.isWatch, opts.bundleName, BundleKeys.SCRIPTS,
+e);
+})
+.pipe(gif(function (file) {
+    return sourcemaps.isEnabled(opts);
+  }, through.obj(sourcemaps.verify)
+))
+.pipe(gif(function (file) {
+    return isMinEnabled.js(file, opts);
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.gulp-bundle-assets.stream_files.scripts" id="apidoc.element.gulp-bundle-assets.stream_files.scripts">
+        function <span class="apidocSignatureSpan">gulp-bundle-assets.stream_files.</span>scripts
+        <span class="apidocSignatureSpan">(opts)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">scripts = function (opts) {
+  var self = this,
+    concatOpts = defaults({
+      path: opts.bundleName + ((opts.isBundleAll &amp;&amp; opts.env) ? '.' + opts.env : '') + '.js'
+    }, opts.bundleOptions.pluginOptions['gulp-concat']);
+
+  return gulp.src(opts.src, {base: opts.base})
+    .pipe(using.bundle(opts.bundleName, BundleKeys.SCRIPTS, opts.env, opts.isBundleAll))
+    .pipe(through.obj(function (file, enc, cb) {
+      self.attachStreamOptions(file, opts);
+      this.push(file);
+      cb();
+    }))
+    .pipe(gif(function (file) {
+        return sourcemaps.isEnabled(opts);
+      }, gsourcemaps.init(opts.bundleOptions.pluginOptions['gulp-sourcemaps'][BundleKeys.SCRIPTS].init)
+    ))
+    .pipe(opts.bundleOptions.transforms[BundleKeys.SCRIPTS]())
+    .on('error', function (e) {
+      self.handleTransformError(this, opts.isWatch, opts.bundleName, BundleKeys.SCRIPTS, e);
+    })
+    .pipe(gif(function (file) {
+        return sourcemaps.isEnabled(opts);
+      }, through.obj(sourcemaps.verify)
+    ))
+    .pipe(gif(function (file) {
+        return isMinEnabled.js(file, opts);
+      },
+      gif(function (file) {
+          return file.isStream();
+        },
+        streamify(
+          uglify(opts.bundleOptions.pluginOptions['gulp-uglify'])),
+        uglify(opts.bundleOptions.pluginOptions['gulp-uglify'])
+      )))
+    .on('error', function (e) {
+      self.handleTransformError(this, opts.isWatch, opts.bundleName, BundleKeys.SCRIPTS, e);
+    })
+    .pipe(gif(function (file) {
+        return opts.bundleOptions.order &amp;&amp; opts.bundleOptions.order.scripts;
+      }, order(opts.bundleOptions.order.scripts)
+    ))
+    .pipe(gif(function (file) {
+        return file.isStream();
+      },
+      streamify(concat(concatOpts)),
+      concat(concatOpts)
+    ))
+    .pipe(gif(isOptionEnabled(opts.bundleOptions.rev, opts.env),
+      gif(function (file) {
+        return file.isStream();
+      }, streamify(rev()), rev())
+    ))
+    .pipe(gif(function (file) {
+        return sourcemaps.isEnabled(opts);
+      }, gsourcemaps.write(
+        opts.bundleOptions.pluginOptions['gulp-sourcemaps'][BundleKeys.SCRIPTS].destPath,
+        opts.bundleOptions.pluginOptions['gulp-sourcemaps'][BundleKeys.SCRIPTS].write
+      )
+    ))
+    .pipe(addBundleResultsToFile(opts.bundleName, BundleKeys.SCRIPTS, opts.bundleOptions.result, opts.env, opts.isBundleAll, opts
+.bundleOrder));
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+          logger.log("Starting '" + gutil.colors.cyan("watch") + "' for bundle '" +
+gutil.colors.green(prettyScriptsBundleName) + "'...");
+
+          gulp.watch((typeof scriptWatch === 'string' || util.isArray(scriptWatch)) ? scriptWatch : scriptsPath)
+            .on('change', function (file) { // log changed file?
+
+var start = process.hrtime();
+
+streamFiles.<span class="apidocCodeKeywordSpan">scripts</span>({
+  src: scriptsPath,
+  base: base,
+  env: env,
+  type: type,
+  bundleName: bundleName,
+  bundleOptions: namedBundleObj[BundleKeys.OPTIONS],
+  isBundleAll: isBundleAll,
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.gulp-bundle-assets.stream_files.styles" id="apidoc.element.gulp-bundle-assets.stream_files.styles">
+        function <span class="apidocSignatureSpan">gulp-bundle-assets.stream_files.</span>styles
+        <span class="apidocSignatureSpan">(opts)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">styles = function (opts) {
+  var self = this;
+  return gulp.src(opts.src, {base: opts.base})
+    .pipe(using.bundle(opts.bundleName, BundleKeys.STYLES, opts.env, opts.isBundleAll))
+    .pipe(through.obj(function (file, enc, cb) {
+      self.attachStreamOptions(file, opts);
+      this.push(file);
+      cb();
+    }))
+    .pipe(
+    gif(function (file) {
+        return sourcemaps.isEnabled(opts);
+      }, gsourcemaps.init(opts.bundleOptions.pluginOptions['gulp-sourcemaps'][BundleKeys.STYLES].init)
+    ))
+    .pipe(opts.bundleOptions.transforms[BundleKeys.STYLES]())
+    .on('error', function (e) {
+      self.handleTransformError(this, opts.isWatch, opts.bundleName, BundleKeys.STYLES, e);
+    })
+    .pipe(gif(function (file) {
+        return sourcemaps.isEnabled(opts);
+      }, through.obj(sourcemaps.verify)
+    ))
+    .pipe(gif(function (file) {
+      return isMinEnabled.css(file, opts);
+    }, cleanCSS(opts.bundleOptions.pluginOptions['gulp-clean-css'])))
+    .pipe(gif(function (file) {
+        return opts.bundleOptions.order &amp;&amp; opts.bundleOptions.order.styles;
+      }, order(opts.bundleOptions.order.styles)
+    ))
+    .pipe(concat(opts.bundleName + ((opts.isBundleAll &amp;&amp; opts.env) ? '.' + opts.env : '') + '.css'))
+    .pipe(gif(isOptionEnabled(opts.bundleOptions.rev, opts.env), rev()))
+    .pipe(gif(function (file) {
+        return sourcemaps.isEnabled(opts);
+      }, gsourcemaps.write(
+        opts.bundleOptions.pluginOptions['gulp-sourcemaps'][BundleKeys.STYLES].destPath,
+        opts.bundleOptions.pluginOptions['gulp-sourcemaps'][BundleKeys.STYLES].write
+      )
+    ))
+    .pipe(addBundleResultsToFile(opts.bundleName, BundleKeys.STYLES, opts.bundleOptions.result, opts.env, opts.isBundleAll, opts
+.bundleOrder));
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+          logger.log("Starting '" + gutil.colors.cyan("watch") + "' for bundle '" +
+gutil.colors.green(prettyStylesBundleName) + "'...");
+
+          gulp.watch((typeof styleWatch === 'string' || util.isArray(styleWatch)) ? styleWatch : stylesPath)
+            .on('change', function (file) { // log changed file?
+
+var start = process.hrtime();
+
+streamFiles.<span class="apidocCodeKeywordSpan">styles</span>({
+  src: stylesPath,
+  base: base,
+  env: env,
+  type: type,
+  bundleName: bundleName,
+  bundleOptions: namedBundleObj[BundleKeys.OPTIONS],
+  isBundleAll: isBundleAll,
+...</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.gulp-bundle-assets.string_helper" id="apidoc.module.gulp-bundle-assets.string_helper">module gulp-bundle-assets.string_helper</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.gulp-bundle-assets.string_helper.endsWith" id="apidoc.element.gulp-bundle-assets.string_helper.endsWith">
+        function <span class="apidocSignatureSpan">gulp-bundle-assets.string_helper.</span>endsWith
+        <span class="apidocSignatureSpan">(str, suffix)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">endsWith = function (str, suffix) {
+  if (typeof str !== 'string' || typeof suffix !== 'string') {
+    throw new Error('stringHelper.endsWith expected strings but got str "' + str + '" and suffix "' + suffix + '"');
+  }
+  return str.indexOf(suffix, str.length - suffix.length) !== -1;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+    cb();
+  });
+};
+
+module.exports.copy = function (base) {
+  return through.obj(function (file, enc, cb) {
+    var pathReplace = (base === '.') ? file.cwd : base;
+    if (!stringHelper.<span class="apidocCodeKeywordSpan">endsWith</span>(pathReplace, '/')) {
+      pathReplace += '/';
+    }
+    logger.log("Copy file", gutil.colors.magenta(file.path.replace(pathReplace, '')));
+    this.push(file);
+    cb();
+  });
+};
+...</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.gulp-bundle-assets.transformHelper" id="apidoc.module.gulp-bundle-assets.transformHelper">module gulp-bundle-assets.transformHelper</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.gulp-bundle-assets.transformHelper.browserify" id="apidoc.element.gulp-bundle-assets.transformHelper.browserify">
+        function <span class="apidocSignatureSpan">gulp-bundle-assets.transformHelper.</span>browserify
+        <span class="apidocSignatureSpan">(func)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">browserify = function (func) {
+  return lazypipe()
+    .pipe(function () {
+      var writable = new readableStream.Writable({objectMode: true});
+      var readable = through.obj(function (file, enc, cb) { // noop
+        this.push(file);
+        cb();
+      });
+
+      writable._write = function _write(file, encoding, done) {
+        func(file, readable);
+        return done();
+      };
+
+      return duplexer(writable, readable);
+    });
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.gulp-bundle-assets.transformHelper.coffee" id="apidoc.element.gulp-bundle-assets.transformHelper.coffee">
+        function <span class="apidocSignatureSpan">gulp-bundle-assets.transformHelper.</span>coffee
+        <span class="apidocSignatureSpan">(opts)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">coffee = function (opts) {
+  opts = opts || {};
+  return lazypipe()
+    .pipe(function () {
+      return gif(isCoffeeFile, coffee(opts));
+    });
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.gulp-bundle-assets.transformHelper.less" id="apidoc.element.gulp-bundle-assets.transformHelper.less">
+        function <span class="apidocSignatureSpan">gulp-bundle-assets.transformHelper.</span>less
+        <span class="apidocSignatureSpan">(opts)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">less = function (opts) {
+  opts = opts || {};
+  return lazypipe()
+    .pipe(function () {
+      return gif(isLessFile, less(opts));
+    });
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocSectionDiv">
+<h1><a href="#apidoc.module.gulp-bundle-assets.using" id="apidoc.module.gulp-bundle-assets.using">module gulp-bundle-assets.using</a></h1>
+
+
+    <h2>
+        <a href="#apidoc.element.gulp-bundle-assets.using.bundle" id="apidoc.element.gulp-bundle-assets.using.bundle">
+        function <span class="apidocSignatureSpan">gulp-bundle-assets.using.</span>bundle
+        <span class="apidocSignatureSpan">(key, type, env, bundleAllEnvironments)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">bundle = function (key, type, env, bundleAllEnvironments) {
+  var bundleName = this.bundleName(key, type, env, bundleAllEnvironments);
+  var prefix = "Bundle '" + gutil.colors.green(bundleName) + "' using";
+  return through.obj(function (file, enc, cb) {
+    logger.log(prefix, gutil.colors.magenta(file.relative));
+    this.push(file);
+    cb();
+  });
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+module.exports.scripts = function (opts) {
+var self = this,
+  concatOpts = defaults({
+    path: opts.bundleName + ((opts.isBundleAll &amp;&amp; opts.env) ? '.' + opts.env : '') + '.js'
+;
+  }, opts.bundleOptions.pluginOptions['gulp-concat']);
+
+return gulp.src(opts.src, {base: opts.base})
+  .pipe(using.<span class="apidocCodeKeywordSpan">bundle</span>(opts.bundleName, BundleKeys.SCRIPTS, opts.env, opts.isBundleAll))
+  .pipe(through.obj(function (file, enc, cb) {
+    self.attachStreamOptions(file, opts);
+    this.push(file);
+    cb();
+  }))
+  .pipe(gif(function (file) {
+      return sourcemaps.isEnabled(opts);
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.gulp-bundle-assets.using.bundleName" id="apidoc.element.gulp-bundle-assets.using.bundleName">
+        function <span class="apidocSignatureSpan">gulp-bundle-assets.using.</span>bundleName
+        <span class="apidocSignatureSpan">(key, type, env, bundleAllEnvironments)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">bundleName = function (key, type, env, bundleAllEnvironments) {
+  var envPrefix = '';
+  if (bundleAllEnvironments) {
+    envPrefix = env ? env + '.' : 'default.';
+  }
+  return envPrefix + key + '.' + type;
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+      if (type === BundleKeys.SCRIPTS) {
+
+        scriptWatch = namedBundleObj[BundleKeys.OPTIONS].watch[BundleKeys.SCRIPTS];
+
+        if (scriptWatch !== false) {
+
+          scriptsPath = pathifySrc(namedBundleObj[BundleKeys.SCRIPTS], base, namedBundleObj[BundleKeys.OPTIONS], env);
+          prettyScriptsBundleName = using.<span class="apidocCodeKeywordSpan">bundleName</span>(bundleName, BundleKeys.SCRIPTS,
+env, isBundleAll);
+
+          logger.log("Starting '" + gutil.colors.cyan("watch") + "' for bundle '" +
+gutil.colors.green(prettyScriptsBundleName) + "'...");
+
+          gulp.watch((typeof scriptWatch === 'string' || util.isArray(scriptWatch)) ? scriptWatch : scriptsPath)
+            .on('change', function (file) { // log changed file?
+
+var start = process.hrtime();
+...</pre></li>
+    </ul>
+
+
+
+    <h2>
+        <a href="#apidoc.element.gulp-bundle-assets.using.copy" id="apidoc.element.gulp-bundle-assets.using.copy">
+        function <span class="apidocSignatureSpan">gulp-bundle-assets.using.</span>copy
+        <span class="apidocSignatureSpan">(base)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">copy = function (base) {
+  return through.obj(function (file, enc, cb) {
+    var pathReplace = (base === '.') ? file.cwd : base;
+    if (!stringHelper.endsWith(pathReplace, '/')) {
+      pathReplace += '/';
+    }
+    logger.log("Copy file", gutil.colors.magenta(file.path.replace(pathReplace, '')));
+    this.push(file);
+    cb();
+  });
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">...
+/**
+* @param {String} item
+* @param base
+* @returns {*}
+*/
+StreamCopy.prototype.getStringCopyStream = function (item, base) {
+ return gulp.src(pathifySrc(item, base), { base: base })
+   .pipe(using.<span class="apidocCodeKeywordSpan">copy</span>(base));
+};
+
+/**
+* @param {Object} item
+* @param base
+* @returns {*}
+*/
+...</pre></li>
+    </ul>
+
+
+</div>
+
+<div class="apidocFooterDiv">
+    [ this document was created with
+    <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a>
+    ]
+</div>
+</div>
+</body></html>
