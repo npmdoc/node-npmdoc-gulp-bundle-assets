@@ -51,7 +51,7 @@
 
         href="https://github.com/dowjones/gulp-bundle-assets#readme"
 
-    >gulp-bundle-assets (v2.27.1)</a>
+    >gulp-bundle-assets (v2.28.0)</a>
 </h1>
 <h4>Create asset (js, css) bundles from a config file leveraging the power of streams</h4>
 <div class="apidocSectionDiv"><a
@@ -60,6 +60,15 @@
 ><h1>table of contents</h1></a><ol>
 
     <li class="apidocModuleLi"><a href="#apidoc.module.gulp-bundle-assets">module gulp-bundle-assets</a><ol>
+
+        <li>
+
+            <a class="apidocElementLiA" href="#apidoc.element.gulp-bundle-assets.gulp-bundle-assets">
+            function <span class="apidocSignatureSpan"></span>gulp-bundle-assets
+            <span class="apidocSignatureSpan">(options)</span>
+            </a>
+
+        </li>
 
         <li>
 
@@ -227,6 +236,59 @@
 
 
     <h2>
+        <a href="#apidoc.element.gulp-bundle-assets.gulp-bundle-assets" id="apidoc.element.gulp-bundle-assets.gulp-bundle-assets">
+        function <span class="apidocSignatureSpan"></span>gulp-bundle-assets
+        <span class="apidocSignatureSpan">(options)</span>
+        </a>
+    </h2>
+    <ul>
+    <li>description and source-code<pre class="apidocCodePre">gulp-bundle-assets = function (options) {
+  options = options || {};
+
+  var writable = new readableStream.Writable({objectMode: true});
+  var readable = through.obj(function (file, enc, cb) { // noop
+    this.push(file);
+    cb();
+  });
+
+  writable._write = function _write(file, encoding, done) {
+
+    var config;
+
+    if (file.isNull()) {
+      this.push(file);
+      return done();
+    }
+
+    if (file.isStream()) {
+      this.emit(&#x27;error&#x27;, new gutil.PluginError(&#x27;gulp-bundle-assets&#x27;, &#x27;Streaming not supported&#x27;));
+      return done();
+    }
+
+    try {
+      config = new ConfigModel(file, options);
+    } catch (e) {
+      logger.log(gutil.colors.red(&#x27;Failed to parse config file:&#x27;), gutil.colors.red(file.path));
+      logger.log(e);
+      this.emit(&#x27;error&#x27;, new gutil.PluginError(&#x27;gulp-bundle-assets&#x27;, e));
+      return done();
+    }
+
+    cache.set(&#x27;config&#x27;, config);
+
+    mergeStream.apply(mergeStream, streamBundles(config))
+      .pipe(readable);
+    return done();
+  };
+
+  return duplexer(writable, readable);
+}</pre></li>
+    <li>example usage<pre class="apidocCodePre">n/a</pre></li>
+    </ul>
+
+
+
+    <h2>
         <a href="#apidoc.element.gulp-bundle-assets.results" id="apidoc.element.gulp-bundle-assets.results">
         function <span class="apidocSignatureSpan">gulp-bundle-assets.</span>results
         <span class="apidocSignatureSpan">(opts)</span>
@@ -239,7 +301,8 @@
     options = defaulOptions(opts);
 
   function collectResults(file, enc, cb) {
-    addBundleResults(resultJsons, file, options.pathPrefix, options.fileName);
+    addBundleResults(resultJsons, file, options.pathPrefix, options.fileName, options.outputUnprocessed &#x26;&#x26; options.unprocessedOutputFileName
+, options.unprocessedOutputPathPrefix);
     if (!resultOrder) {
       try {
         resultOrder = file.bundle.result.bundleOrder; // Any one of these properties could be null
@@ -389,14 +452,13 @@ streamFiles.scripts({
   };
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
-  concatOpts = defaults({
-    path: opts.bundleName + ((opts.isBundleAll &#x26;&#x26; opts.env) ? &#x27;.&#x27; + opts.env : &#x27;&#x27;) + &#x27;.js&#x27
-;
   }, opts.bundleOptions.pluginOptions[&#x27;gulp-concat&#x27;]);
 
+var relativeSources = [];
 return gulp.src(opts.src, {base: opts.base})
   .pipe(using.bundle(opts.bundleName, BundleKeys.SCRIPTS, opts.env, opts.isBundleAll))
   .pipe(through.obj(function (file, enc, cb) {
+    relativeSources.push(file.relative);
     self.<span class="apidocCodeKeywordSpan">attachStreamOptions</span>(file, opts);
     this.push(file);
     cb();
@@ -461,9 +523,11 @@ e);
       path: opts.bundleName + ((opts.isBundleAll &#x26;&#x26; opts.env) ? &#x27;.&#x27; + opts.env : &#x27;&#x27;) + &#x27;.js&#x27;
     }, opts.bundleOptions.pluginOptions[&#x27;gulp-concat&#x27;]);
 
+  var relativeSources = [];
   return gulp.src(opts.src, {base: opts.base})
     .pipe(using.bundle(opts.bundleName, BundleKeys.SCRIPTS, opts.env, opts.isBundleAll))
     .pipe(through.obj(function (file, enc, cb) {
+      relativeSources.push(file.relative);
       self.attachStreamOptions(file, opts);
       this.push(file);
       cb();
@@ -516,7 +580,7 @@ e);
       )
     ))
     .pipe(addBundleResultsToFile(opts.bundleName, BundleKeys.SCRIPTS, opts.bundleOptions.result, opts.env, opts.isBundleAll, opts
-.bundleOrder));
+.bundleOrder, relativeSources));
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
           logger.log(&#x22;Starting &#x27;&#x22; + gutil.colors.cyan(&#x22;watch&#x22;) + &#x22;&#x27; for bundle &#x27;&#x22; +
@@ -549,9 +613,11 @@ streamFiles.<span class="apidocCodeKeywordSpan">scripts</span>({
     <ul>
     <li>description and source-code<pre class="apidocCodePre">styles = function (opts) {
   var self = this;
+  var relativeSources = [];
   return gulp.src(opts.src, {base: opts.base})
     .pipe(using.bundle(opts.bundleName, BundleKeys.STYLES, opts.env, opts.isBundleAll))
     .pipe(through.obj(function (file, enc, cb) {
+      relativeSources.push(file.relative);
       self.attachStreamOptions(file, opts);
       this.push(file);
       cb();
@@ -586,7 +652,7 @@ streamFiles.<span class="apidocCodeKeywordSpan">scripts</span>({
       )
     ))
     .pipe(addBundleResultsToFile(opts.bundleName, BundleKeys.STYLES, opts.bundleOptions.result, opts.env, opts.isBundleAll, opts
-.bundleOrder));
+.bundleOrder, relativeSources));
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
           logger.log(&#x22;Starting &#x27;&#x22; + gutil.colors.cyan(&#x22;watch&#x22;) + &#x22;&#x27; for bundle &#x27;&#x22; +
@@ -743,22 +809,22 @@ module.exports.copy = function (base) {
   });
 }</pre></li>
     <li>example usage<pre class="apidocCodePre">...
-module.exports.scripts = function (opts) {
 var self = this,
   concatOpts = defaults({
     path: opts.bundleName + ((opts.isBundleAll &#x26;&#x26; opts.env) ? &#x27;.&#x27; + opts.env : &#x27;&#x27;) + &#x27;.js&#x27
 ;
   }, opts.bundleOptions.pluginOptions[&#x27;gulp-concat&#x27;]);
 
+var relativeSources = [];
 return gulp.src(opts.src, {base: opts.base})
   .pipe(using.<span class="apidocCodeKeywordSpan">bundle</span>(opts.bundleName, BundleKeys.SCRIPTS, opts.env, opts.isBundleAll))
   .pipe(through.obj(function (file, enc, cb) {
+    relativeSources.push(file.relative);
     self.attachStreamOptions(file, opts);
     this.push(file);
     cb();
   }))
   .pipe(gif(function (file) {
-      return sourcemaps.isEnabled(opts);
 ...</pre></li>
     </ul>
 
